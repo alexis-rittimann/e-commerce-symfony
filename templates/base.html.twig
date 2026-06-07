@@ -1,24 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}OLEA — Huiles pressées à froid{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🫒</text></svg>">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        {% block stylesheets %}{% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
-
-        {% set frankenphpHotReload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-        {% if frankenphpHotReload %}
-        <meta name="frankenphp-hot-reload:url" content="{{ frankenphpHotReload }}">
-        <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-        <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-        {% endif %}
     </head>
     <body>
+        {# ===================== Header / navigation (toutes pages) ===================== #}
+        <header>
+            <nav class="nav">
+                <div class="left">
+                    <a class="brand" href="{{ path('app_home') }}"><img src="{{ asset('images/logo.webp') }}" alt="OLEA — The flavor of life" class="brand-logo"></a>
+                    <a class="lnk" href="{{ path('app_home') }}">Boutique</a>
+                    <a class="lnk" href="#">Le procédé</a>
+                    <a class="lnk" href="#">Journal</a>
+                </div>
+                <div class="right">
+                    {# Les liens conditionnels (Connexion / Inscription / Mon compte / Déconnexion)
+                       seront ajoutés en Phase 3 quand les routes de sécurité existeront. #}
+                    <span class="pill mono">Récolte 2025 ↗</span>
+                </div>
+            </nav>
+        </header>
+
         {% block body %}{% endblock %}
+
+        {# ===================== Footer (toutes pages) ===================== #}
+        <footer>
+            <div class="fcta">
+                <h3>Goûtez la différence.</h3>
+                <a class="cta" href="{{ path('app_home') }}">Voir la boutique →</a>
+            </div>
+            <div class="fgrid">
+                <div>
+                    <div class="brand2">OLEA™</div>
+                    <p class="baseline">Huiles pressées à froid, en France. Olive, colza, noix.</p>
+                </div>
+                <div class="fcol">
+                    <h5>Boutique</h5>
+                    <a href="{{ path('app_home') }}">Olive</a>
+                    <a href="{{ path('app_home') }}">Colza</a>
+                    <a href="{{ path('app_home') }}">Noix</a>
+                </div>
+                <div class="fcol">
+                    <h5>Atelier</h5>
+                    <a href="#">Le procédé</a>
+                    <a href="#">Producteurs</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="fcol">
+                    <h5>Aide</h5>
+                    <a href="#">Livraison</a>
+                    <a href="#">CGV</a>
+                    <a href="#">Mentions</a>
+                </div>
+            </div>
+            <div class="fbar">
+                <span>© OLEA - {{ "now"|date("Y") }}</span>
+                <span class="mono">FR · Instagram · Pinterest</span>
+            </div>
+        </footer>
     </body>
 </html>

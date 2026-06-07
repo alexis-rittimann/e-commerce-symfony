@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>chrisolea — Accueil (Atelier clair)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#F0ECDD;--paper:#F7F4EA;--paper-2:#EAE4D2;--ink:#1C1F14;--muted:#6E7253;
+    --olive:#414A22;--olive-deep:#2C3318;
+    --lime:#C2CE4E;--lime-2:#D7E06F;--lime-tint:#E8ECC9;--lime-deep:#8C9C2F;--line:#DAD3BF;
+    --disp:'Space Grotesk',sans-serif;--sans:'Hanken Grotesk',system-ui,sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:var(--mono);letter-spacing:.03em}
+  .ph{position:relative;overflow:hidden;background:repeating-linear-gradient(45deg,#E4DFCC 0 11px,#DDD7C0 11px 22px)}
+  .ph::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#8A855F;text-align:center;padding:16px}
+  .ph.dark{background:repeating-linear-gradient(45deg,#374020 0 11px,#313A1C 11px 22px)}
+  .ph.dark::after{color:#9AA56A}
+  .ph.lime{background:repeating-linear-gradient(45deg,#BAC646 0 11px,#C7D255 11px 22px)}
+  .ph.lime::after{color:#5C6620}
+
+  /* header — light */
+  header{background:var(--paper);color:var(--ink);position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:0 36px;height:72px}
+  .nav .left,.nav .right{display:flex;align-items:center;gap:28px}
+  .nav a.lnk{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+  .nav a.lnk:hover{color:var(--ink)}
+  .brand{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:-.02em;color:var(--olive)}
+  .brand sup{font-size:10px;letter-spacing:.1em;color:var(--lime-deep);vertical-align:super}
+  .pill{border:1px solid var(--line);border-radius:40px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--olive)}
+  .icn{width:19px;height:19px;stroke:var(--ink);stroke-width:1.5;fill:none}
+
+  /* hero — light */
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;border-bottom:1px solid var(--line)}
+  .hero-l{background:var(--paper);color:var(--ink);padding:64px 56px 56px;display:flex;flex-direction:column;justify-content:space-between;min-height:600px}
+  .kick{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime-deep);display:flex;gap:10px;align-items:center}
+  .kick::before{content:"";width:30px;height:1px;background:var(--lime-deep)}
+  .hbig{font-family:var(--disp);font-weight:700;font-size:88px;line-height:.92;letter-spacing:-.035em;text-transform:uppercase;margin-top:40px;color:var(--ink)}
+  .hbig em{font-style:normal;color:var(--lime-deep)}
+  .hero-l .bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-top:40px}
+  .hero-l p{font-size:15.5px;line-height:1.6;color:var(--muted);max-width:360px}
+  .cta{background:var(--olive);color:var(--paper);font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.02em;padding:16px 26px;border-radius:40px;display:inline-flex;gap:10px;white-space:nowrap;transition:background .2s}
+  .cta:hover{background:var(--olive-deep)}
+  .hero-r{position:relative;background:var(--paper-2)}
+  .hero-r .ph{position:absolute;inset:0}
+  .hero-r .ticket{position:absolute;top:24px;right:24px;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:14px 18px;font-family:var(--disp);text-align:right}
+  .hero-r .ticket b{display:block;font-size:22px;font-weight:700;color:var(--olive)}
+  .hero-r .ticket span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+  /* ticker */
+  .ticker{background:var(--lime);color:var(--olive-deep);font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:.04em;text-transform:uppercase;padding:13px 0;display:flex;justify-content:center;white-space:nowrap;overflow:hidden}
+  .ticker span{display:inline-block}
+
+  .sec{padding:80px 36px}
+  .sechead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px;max-width:1340px;margin-left:auto;margin-right:auto}
+  .sechead h2{font-family:var(--disp);font-weight:700;font-size:40px;letter-spacing:-.025em;text-transform:uppercase}
+  .sechead .idx{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .grid{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+  .card .imgw{aspect-ratio:1/1.04;position:relative}
+  .card .imgw .ph{position:absolute;inset:0}
+  .card .num{position:absolute;top:12px;left:14px;font-family:var(--mono);font-size:11px;color:var(--muted);z-index:2}
+  .card .b{position:absolute;top:12px;right:12px;z-index:2;background:var(--lime);color:var(--olive-deep);font-family:var(--disp);font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:5px 8px;border-radius:30px}
+  .card .info{padding:18px 18px 20px;display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line)}
+  .card h3{font-family:var(--disp);font-weight:600;font-size:19px;letter-spacing:-.01em}
+  .card .fmt{font-size:12.5px;color:var(--muted)}
+  .card .row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+  .card .price{font-family:var(--disp);font-weight:700;font-size:17px}
+  .card .plus{width:32px;height:32px;border-radius:50%;background:var(--olive);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:18px}
+
+  /* stat band — light lime tint */
+  .band{background:var(--lime-tint);color:var(--olive-deep);padding:84px 36px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .bandin{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;align-items:end}
+  .band h2{font-family:var(--disp);font-weight:700;font-size:46px;line-height:1;letter-spacing:-.03em;text-transform:uppercase}
+  .band h2 em{font-style:normal;color:var(--lime-deep)}
+  .stat b{font-family:var(--disp);font-weight:700;font-size:60px;color:var(--olive);letter-spacing:-.03em;line-height:1}
+  .stat span{display:block;font-size:13.5px;color:#5A6038;margin-top:8px;max-width:200px}
+
+  .proc{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+  .proc .media{border-radius:8px;overflow:hidden;min-height:440px;position:relative}
+  .proc .media .ph{position:absolute;inset:0}
+  .proc .txt{background:var(--lime-2);border-radius:8px;padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
+  .proc .txt .kick{color:var(--olive-deep)}
+  .proc .txt .kick::before{background:var(--olive-deep)}
+  .proc .txt h2{font-family:var(--disp);font-weight:700;font-size:38px;letter-spacing:-.025em;text-transform:uppercase;margin:18px 0 14px;color:var(--olive-deep)}
+  .proc .txt p{font-size:15px;line-height:1.6;color:#3B4322;max-width:380px}
+  .steps{margin-top:24px;display:flex;flex-direction:column;gap:0}
+  .steps .s{display:flex;gap:16px;padding:14px 0;border-top:1px solid rgba(44,51,24,.25)}
+  .steps .s b{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--olive-deep);width:30px}
+  .steps .s p{font-size:13.5px;color:#3B4322}
+
+  /* footer — light */
+  footer{background:var(--paper-2);color:var(--muted)}
+  .fcta{max-width:1340px;margin:0 auto;padding:70px 36px;display:flex;justify-content:space-between;align-items:center;gap:30px;border-bottom:1px solid var(--line)}
+  .fcta h3{font-family:var(--disp);font-weight:700;font-size:40px;letter-spacing:-.03em;text-transform:uppercase;color:var(--ink)}
+  .fgrid{max-width:1340px;margin:0 auto;padding:50px 36px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px}
+  .fgrid .brand2{font-family:var(--disp);font-weight:700;font-size:26px;color:var(--olive)}
+  .fcol h5{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);margin-bottom:14px}
+  .fcol a{display:block;font-size:14px;padding:6px 0;color:var(--muted)}
+  .fcol a:hover{color:var(--ink)}
+  .fbar{max-width:1340px;margin:0 auto;padding:20px 36px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12px;color:#8E8B71}
+</style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="left">
+        <a class="brand" href="atelier-accueil-clair.html">chrisolea<sup>™</sup></a>
+        <a class="lnk" href="#shop">Boutique</a>
+        <a class="lnk" href="#">Le procédé</a>
+        <a class="lnk" href="#">Journal</a>
+      </div>
+      <div class="right">
+        <span class="pill mono">Récolte 2025 ↗</span>
+        <svg class="icn" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <svg class="icn" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-l">
+      <div class="kick mono">Atelier d'huiles · France</div>
+      <h1 class="hbig">Pressées<br/>à <em>froid.</em><br/>Point.</h1>
+      <div class="bottom">
+        <p>Olive, colza, noix — extraites à moins de 27°C, sans solvant. Le goût brut de la graine, rien d'ajouté.</p>
+        <a class="cta" href="atelier-produit-clair.html">Voir la boutique →</a>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="ph dark" data-label="Photo héro — bouteille olive, fond graphique"></div>
+      <div class="ticket"><b>28€/L</b><span>Vierge extra</span></div>
+    </div>
+  </section>
+
+  <div class="ticker"><span>Vierge extra ✦ Sans solvant ✦ Première pression ✦ Origine France ✦ Récolte 2025 ✦ Vierge extra ✦ Sans solvant ✦ Première pression ✦</span></div>
+
+  <section class="sec" id="shop">
+    <div class="sechead">
+      <h2>La boutique</h2>
+      <span class="idx mono">[ 04 références ]</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="atelier-produit-clair.html">
+        <div class="imgw"><span class="num">01</span><span class="b">Best-seller</span><div class="ph" data-label="Huile d'olive 75cl"></div></div>
+        <div class="info"><h3>Huile d'olive</h3><span class="fmt">Vierge extra · 50/75cl</span><div class="row"><span class="price">dès 14€</span><span class="plus">+</span></div></div>
+      </a>
+      <a class="card" href="atelier-produit-clair.html">
+        <div class="imgw"><span class="num">02</span><div class="ph" data-label="Huile de colza 50cl"></div></div>
+        <div class="info"><h3>Huile de colza</h3><span class="fmt">Pressée à froid · 50cl</span><div class="row"><span class="price">11€</span><span class="plus">+</span></div></div>
+      </a>
+      <a class="card" href="atelier-produit-clair.html">
+        <div class="imgw"><span class="num">03</span><div class="ph" data-label="Huile de noix 25cl"></div></div>
+        <div class="info"><h3>Huile de noix</h3><span class="fmt">Grillée à froid · 25cl</span><div class="row"><span class="price">13€</span><span class="plus">+</span></div></div>
+      </a>
+      <a class="card" href="atelier-produit-clair.html">
+        <div class="imgw"><span class="num">04</span><span class="b">Coffret</span><div class="ph lime" data-label="Trio découverte 3×25cl"></div></div>
+        <div class="info"><h3>Le trio</h3><span class="fmt">Coffret · 3×25cl</span><div class="row"><span class="price">36€</span><span class="plus">+</span></div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="bandin">
+      <h2>Une seule <em>pression.</em> À froid. Sans compromis.</h2>
+      <div class="stat"><b>&lt;27°</b><span>Température max d'extraction. Zéro chauffe, arômes intacts.</span></div>
+      <div class="stat"><b>0</b><span>Solvant, additif, conservateur. Que de l'huile, vraiment.</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="proc">
+      <div class="media"><div class="ph dark" data-label="Photo atelier — pressoir, filets d'huile"></div></div>
+      <div class="txt">
+        <div class="kick mono">Le procédé</div>
+        <h2>Du champ à la bouteille en 24h</h2>
+        <p>On récolte à maturité, on presse mécaniquement le jour même, on met en verre teinté. C'est tout — et c'est ce qui change tout.</p>
+        <div class="steps">
+          <div class="s"><b>01</b><p>Récolte à la main, pressée sous 24h.</p></div>
+          <div class="s"><b>02</b><p>Pression mécanique à froid, sous 27°C.</p></div>
+          <div class="s"><b>03</b><p>Mise en bouteille teintée, à l'abri de la lumière.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fcta">
+      <h3>Goûtez la différence.</h3>
+      <a class="cta" href="atelier-produit-clair.html">Commander le trio →</a>
+    </div>
+    <div class="fgrid">
+      <div><div class="brand2">chrisolea™</div><p style="font-size:13.5px;margin-top:12px;max-width:280px;color:var(--muted)">Huiles pressées à froid, en France. Olive, colza, noix.</p></div>
+      <div class="fcol"><h5>Boutique</h5><a href="#">Olive</a><a href="#">Colza</a><a href="#">Noix</a><a href="#">Coffrets</a></div>
+      <div class="fcol"><h5>Atelier</h5><a href="#">Le procédé</a><a href="#">Producteurs</a><a href="#">Contact</a></div>
+      <div class="fcol"><h5>Aide</h5><a href="#">Livraison</a><a href="#">CGV</a><a href="#">Mentions</a></div>
+    </div>
+    <div class="fbar"><span>© 2026 chrisolea</span><span class="mono">FR · Instagram · Pinterest</span></div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>chrisolea — Huile d'olive (Atelier clair)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#F0ECDD;--paper:#F7F4EA;--paper-2:#EAE4D2;--ink:#1C1F14;--muted:#6E7253;
+    --olive:#414A22;--olive-deep:#2C3318;
+    --lime:#C2CE4E;--lime-2:#D7E06F;--lime-tint:#E8ECC9;--lime-deep:#8C9C2F;--line:#DAD3BF;
+    --disp:'Space Grotesk',sans-serif;--sans:'Hanken Grotesk',system-ui,sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:var(--mono);letter-spacing:.03em}
+  .ph{position:relative;overflow:hidden;background:repeating-linear-gradient(45deg,#E4DFCC 0 11px,#DDD7C0 11px 22px)}
+  .ph::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#8A855F;text-align:center;padding:16px}
+  .ph.dark{background:repeating-linear-gradient(45deg,#374020 0 11px,#313A1C 11px 22px)}
+  .ph.dark::after{color:#9AA56A}
+
+  header{background:var(--paper);color:var(--ink);position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:0 36px;height:72px}
+  .nav .left,.nav .right{display:flex;align-items:center;gap:28px}
+  .nav a.lnk{font-size:13px;font-weight:600;color:var(--muted)}
+  .nav a.lnk:hover{color:var(--ink)}
+  .brand{font-family:var(--disp);font-weight:700;font-size:24px;letter-spacing:-.02em;color:var(--olive)}
+  .brand sup{font-size:10px;color:var(--lime-deep)}
+  .pill{border:1px solid var(--line);border-radius:40px;padding:8px 16px;font-size:12px;font-weight:600;color:var(--olive)}
+  .icn{width:19px;height:19px;stroke:var(--ink);stroke-width:1.5;fill:none}
+
+  .crumb{max-width:1340px;margin:0 auto;padding:22px 36px;font-size:12.5px;color:var(--muted)}
+  .crumb a:hover{color:var(--ink)}
+
+  .product{max-width:1340px;margin:0 auto;padding:0 36px 70px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .gallery .cell{border-radius:10px;overflow:hidden;position:relative}
+  .gallery .cell .ph{position:absolute;inset:0}
+  .gallery .big{grid-column:span 2;aspect-ratio:16/12}
+  .gallery .cell.sq{aspect-ratio:1/1}
+
+  .panel{position:sticky;top:96px;background:var(--paper);border-radius:14px;padding:38px 36px;border:1px solid var(--line)}
+  .p-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+  .p-brand{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .tagb{background:var(--lime);color:var(--olive-deep);font-family:var(--disp);font-weight:700;font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:30px}
+  .p-title{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1.02;letter-spacing:-.025em;margin:10px 0 12px}
+  .rating{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:18px}
+  .stars{color:var(--olive);letter-spacing:2px}
+  .price{font-family:var(--disp);font-weight:700;font-size:30px;display:flex;align-items:baseline;gap:10px}
+  .price span{font-family:var(--sans);font-weight:500;font-size:12.5px;color:var(--muted)}
+  .p-desc{font-size:14.5px;line-height:1.6;color:#4A4E33;margin:16px 0 24px}
+
+  .label{font-family:var(--disp);font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:700;margin-bottom:10px;color:var(--olive)}
+  .formats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+  .fmt{border:1.5px solid var(--line);background:var(--cream);padding:13px 14px;border-radius:10px;cursor:pointer;text-align:left}
+  .fmt b{display:block;font-family:var(--disp);font-size:16px;font-weight:700}
+  .fmt span{font-size:11.5px;color:var(--muted)}
+  .fmt.on{border-color:var(--olive);background:#fff}
+  .fmt.on b{color:var(--olive)}
+
+  .buyrow{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-bottom:14px}
+  .qty{display:flex;align-items:center;border:1.5px solid var(--line);border-radius:40px;background:var(--cream)}
+  .qty button{width:42px;height:52px;background:none;border:none;font-size:18px;color:var(--ink);cursor:pointer}
+  .qty input{width:34px;text-align:center;border:none;background:none;font-family:var(--disp);font-size:16px;font-weight:700}
+  .add{background:var(--olive);color:var(--cream);border:none;border-radius:40px;font-family:var(--disp);font-weight:700;font-size:14.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s}
+  .add:hover{background:var(--olive-deep)}
+  .reassure{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.04em;background:var(--cream);border:1px solid var(--line);border-radius:30px;padding:6px 12px;color:var(--muted)}
+
+  .acc details{border-top:1px solid var(--line)}
+  .acc details:last-child{border-bottom:1px solid var(--line)}
+  .acc summary{list-style:none;cursor:pointer;padding:15px 0;display:flex;justify-content:space-between;font-family:var(--disp);font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+  .acc summary::-webkit-details-marker{display:none}
+  .acc summary .pm{color:var(--olive)}
+  .acc .body{padding:0 0 16px;font-size:13.5px;line-height:1.6;color:#4A4E33}
+  .acc details[open] .pm{transform:rotate(45deg)}
+
+  /* spec band — light */
+  .specs{background:var(--lime-tint);color:var(--olive-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .specsin{max-width:1340px;margin:0 auto;padding:0 36px;display:grid;grid-template-columns:repeat(4,1fr)}
+  .spec{padding:44px 28px;border-left:1px solid rgba(44,51,24,.18)}
+  .spec:first-child{border-left:none;padding-left:0}
+  .spec .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-deep);margin-bottom:12px}
+  .spec b{font-family:var(--disp);font-weight:700;font-size:26px;color:var(--olive);display:block;margin-bottom:6px;letter-spacing:-.02em}
+  .spec p{font-size:13px;color:#5A6038;line-height:1.5}
+
+  .sec{max-width:1340px;margin:0 auto;padding:70px 36px 90px}
+  .sechead{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px}
+  .sechead h2{font-family:var(--disp);font-weight:700;font-size:34px;letter-spacing:-.025em;text-transform:uppercase}
+  .sechead a{font-family:var(--disp);font-weight:600;font-size:13px;color:var(--olive)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .card .imgw{aspect-ratio:1/1;position:relative}
+  .card .imgw .ph{position:absolute;inset:0}
+  .card .info{padding:16px 18px 18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .card h3{font-family:var(--disp);font-weight:600;font-size:18px}
+  .card .fmt2{font-size:12px;color:var(--muted)}
+  .card .price2{font-family:var(--disp);font-weight:700;font-size:16px}
+
+  footer{background:var(--paper-2);color:var(--muted);border-top:1px solid var(--line)}
+  .fbar{max-width:1340px;margin:0 auto;padding:24px 36px;display:flex;justify-content:space-between;font-size:12px}
+  .fbar .brand2{font-family:var(--disp);font-weight:700;color:var(--olive)}
+</style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <div class="left">
+        <a class="brand" href="atelier-accueil-clair.html">chrisolea<sup>™</sup></a>
+        <a class="lnk" href="atelier-accueil-clair.html">Boutique</a>
+        <a class="lnk" href="#">Le procédé</a>
+        <a class="lnk" href="#">Journal</a>
+      </div>
+      <div class="right">
+        <span class="pill mono">Récolte 2025 ↗</span>
+        <svg class="icn" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <svg class="icn" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2L5 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+      </div>
+    </nav>
+  </header>
+
+  <div class="crumb"><a href="atelier-accueil-clair.html">Boutique</a> / <span style="color:var(--ink)">Huile d'olive vierge extra</span></div>
+
+  <section class="product">
+    <div class="gallery">
+      <div class="cell big"><div class="ph dark" data-label="Photo produit — bouteille huile d'olive, fond graphique"></div></div>
+      <div class="cell sq"><div class="ph" data-label="Détail étiquette"></div></div>
+      <div class="cell sq"><div class="ph" data-label="Filet d'huile / macro"></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="p-top">
+        <span class="p-brand">chrisolea / 01</span>
+        <span class="tagb">Best-seller</span>
+      </div>
+      <h1 class="p-title">Huile d'olive vierge extra</h1>
+      <div class="rating"><span class="stars">★★★★★</span><span>4,9 · 218 avis</span></div>
+      <div class="price">14,00 € <span>50cl · 28€/L</span></div>
+      <p class="p-desc">Première pression à froid, olives du Sud récoltées à maturité. Fruité vert, notes d'herbe et d'amande, finale poivrée. À cru, sur tout.</p>
+
+      <div class="label">Format</div>
+      <div class="formats">
+        <button class="fmt on"><b>50 cl</b><span>14,00 € · 28€/L</span></button>
+        <button class="fmt"><b>75 cl</b><span>19,50 € · 26€/L</span></button>
+      </div>
+
+      <div class="label">Quantité</div>
+      <div class="buyrow">
+        <div class="qty"><button>–</button><input value="1" /><button>+</button></div>
+        <button class="add">Ajouter — 14,00 € →</button>
+      </div>
+      <div class="reassure">
+        <span class="chip">✦ Pressée à froid</span>
+        <span class="chip">✦ Sans solvant</span>
+        <span class="chip">✦ Expédié 48h</span>
+      </div>
+
+      <div class="acc">
+        <details open><summary>Composition <span class="pm">+</span></summary><div class="body">100% huile d'olive vierge extra, première pression à froid. Variétés Aglandau &amp; Bouteillan. Aucun additif.</div></details>
+        <details><summary>Dégustation <span class="pm">+</span></summary><div class="body">Fruité vert intense, artichaut, amande fraîche, ardence poivrée. Parfaite crue : salades, légumes grillés, poisson, burrata.</div></details>
+        <details><summary>Conservation <span class="pm">+</span></summary><div class="body">À l'abri de la lumière et de la chaleur. À consommer dans les 6 mois après ouverture.</div></details>
+        <details><summary>Origine &amp; récolte <span class="pm">+</span></summary><div class="body">Oliveraies des Bouches-du-Rhône. Récolte 2025, pressée sous 24h à moins de 27°C.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="specs">
+    <div class="specsin">
+      <div class="spec"><div class="k">Intensité</div><b>Fruité vert</b><p>Caractère franc, ardence marquée.</p></div>
+      <div class="spec"><div class="k">Arômes</div><b>Herbe · Amande</b><p>Artichaut cru, note poivrée.</p></div>
+      <div class="spec"><div class="k">Usage</div><b>À cru</b><p>Salades, légumes, poisson.</p></div>
+      <div class="spec"><div class="k">Acidité</div><b>&lt; 0,3%</b><p>Sous le seuil vierge extra.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sechead"><h2>À associer</h2><a href="atelier-accueil-clair.html">Toute la boutique →</a></div>
+    <div class="grid">
+      <a class="card" href="atelier-produit-clair.html"><div class="imgw"><div class="ph" data-label="Huile de colza 50cl"></div></div><div class="info"><div><h3>Colza</h3><div class="fmt2">Pressée à froid · 50cl</div></div><span class="price2">11€</span></div></a>
+      <a class="card" href="atelier-produit-clair.html"><div class="imgw"><div class="ph" data-label="Huile de noix 25cl"></div></div><div class="info"><div><h3>Noix</h3><div class="fmt2">Grillée à froid · 25cl</div></div><span class="price2">13€</span></div></a>
+      <a class="card" href="atelier-produit-clair.html"><div class="imgw"><div class="ph dark" data-label="Trio 3×25cl"></div></div><div class="info"><div><h3>Le trio</h3><div class="fmt2">Coffret · 3×25cl</div></div><span class="price2">36€</span></div></a>
+    </div>
+  </section>
+
+  <footer><div class="fbar"><span class="brand2">chrisolea™</span><span>© 2026 — Huiles pressées à froid, en France</span></div></footer>
+</body>
+</html>
