@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription — OLEA{% endblock %}
+
+{% block body %}
+<main class="p-auth">
+    <div class="auth-card">
+        <div class="kick">Bienvenue</div>
+        <h1>Créer un compte</h1>
+        <p class="sub">Rejoignez OLEA pour commander nos huiles pressées à froid.</p>
+
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.firstName) }}
+            {{ form_row(registrationForm.lastName) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword.first) }}
+            {{ form_row(registrationForm.plainPassword.second) }}
+
+            <div class="cgu-row">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms) }}
+            </div>
+            {{ form_errors(registrationForm.agreeTerms) }}
+
+            <button type="submit" class="cta">Créer mon compte →</button>
+        {{ form_end(registrationForm) }}
+
+        <p class="switch">Déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+    </div>
+</main>
+{% endblock %}

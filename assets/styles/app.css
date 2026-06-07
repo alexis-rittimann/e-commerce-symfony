@@ -485,3 +485,45 @@ footer { background: var(--paper-2); color: var(--muted); }
     .fcta { flex-direction: column; align-items: flex-start; }
     .fgrid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ===========================================================================
+   PAGES AUTHENTIFICATION  (.p-auth)  — connexion & inscription
+   =========================================================================== */
+.p-auth { max-width: 480px; margin: 0 auto; padding: 60px 24px 100px; }
+.p-auth .auth-card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 40px 36px; }
+.p-auth .kick { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--lime-deep); margin-bottom: 12px; }
+.p-auth h1 { font-family: var(--disp); font-weight: 700; font-size: 30px; letter-spacing: -.025em; text-transform: uppercase; line-height: 1.05; }
+.p-auth .sub { font-size: 14px; color: var(--muted); margin: 8px 0 26px; }
+
+/* Lignes de formulaire */
+.p-auth form > div { margin-bottom: 16px; }
+.p-auth label { display: block; font-family: var(--disp); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--olive); margin-bottom: 6px; }
+.p-auth input[type=text],
+.p-auth input[type=email],
+.p-auth input[type=password] {
+    width: 100%;
+    border: 1.5px solid var(--line);
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink);
+}
+.p-auth input:focus { outline: none; border-color: var(--olive); background: #fff; }
+
+/* Messages d'erreur (sous chaque champ) */
+.p-auth ul { list-style: none; margin-top: 6px; }
+.p-auth ul li,
+.p-auth .form-error { color: #B3261E; font-size: 12.5px; line-height: 1.4; }
+.p-auth .alert { background: #FBE9E7; border: 1px solid #F3C0B8; color: #B3261E; border-radius: 10px; padding: 12px 14px; font-size: 13.5px; margin-bottom: 18px; }
+
+/* Case à cocher CGU */
+.p-auth .cgu-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px; }
+.p-auth .cgu-row input { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--olive); }
+.p-auth .cgu-row label { display: inline; margin: 0; font-family: var(--sans); font-weight: 500; font-size: 13.5px; letter-spacing: 0; text-transform: none; color: var(--muted); }
+
+/* Bouton + lien de bascule */
+.p-auth button[type=submit] { width: 100%; justify-content: center; margin-top: 10px; }
+.p-auth .switch { text-align: center; margin-top: 24px; font-size: 14px; color: var(--muted); }
+.p-auth .switch a { color: var(--olive); font-weight: 600; }

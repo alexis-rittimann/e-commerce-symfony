@@ -27,9 +27,15 @@
                     <a class="lnk" href="#">Journal</a>
                 </div>
                 <div class="right">
-                    {# Les liens conditionnels (Connexion / Inscription / Mon compte / Déconnexion)
-                       seront ajoutés en Phase 3 quand les routes de sécurité existeront. #}
-                    <span class="pill mono">Récolte 2025 ↗</span>
+                    {% if app.user %}
+                        <a class="lnk" href="{{ path('app_home') }}">Nos produits</a>
+                        <a class="lnk" href="#">Mon panier</a>
+                        <a class="lnk" href="#">Mon compte</a>
+                        <a class="lnk" href="{{ path('app_logout') }}">Déconnexion</a>
+                    {% else %}
+                        <a class="lnk" href="{{ path('app_login') }}">Connexion</a>
+                        <a class="lnk" href="{{ path('app_register') }}">Inscription</a>
+                    {% endif %}
                 </div>
             </nav>
         </header>
