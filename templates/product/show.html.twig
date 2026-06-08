@@ -34,13 +34,24 @@
             <div class="price">{{ product.price|number_format(2, ',', ' ') }} € <span>{{ product.shortDescription }}</span></div>
             <p class="p-desc">{{ product.fullDescription }}</p>
 
-            {# Formulaire d'ajout au panier — sera câblé en Phase 4 (dépend de l'authentification + du panier).
-               Pour l'instant : rendu visuel statique. #}
-            <div class="label">Quantité</div>
-            <div class="buyrow">
-                <div class="qty"><button type="button">–</button><input value="1" readonly><button type="button">+</button></div>
-                <button type="button" class="add">Ajouter — {{ product.price|number_format(2, ',', ' ') }} € →</button>
-            </div>
+            {% if app.user %}
+                <form method="post" action="{{ path('app_cart_add', {id: product.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('add-to-cart') }}">
+                    <div class="label">Quantité</div>
+                    <div class="buyrow">
+                        <div class="qty" data-controller="quantity">
+                            <button type="button" data-action="quantity#decrease">–</button>
+                            <input type="number" name="quantity" min="0" value="{{ cartQuantity > 0 ? cartQuantity : 1 }}" data-quantity-target="input">
+                            <button type="button" data-action="quantity#increase">+</button>
+                        </div>
+                        <button type="submit" class="add">
+                            {{ cartQuantity > 0 ? 'Mettre à jour' : 'Ajouter au panier' }} →
+                        </button>
+                    </div>
+                </form>
+            {% else %}
+                <a class="cta login-cta" href="{{ path('app_login') }}">Se connecter pour commander →</a>
+            {% endif %}
             <div class="reassure">
                 <span class="chip">✦ Pressée à froid</span>
                 <span class="chip">✦ Sans solvant</span>

@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte — OLEA{% endblock %}
+
+{% block body %}
+<main class="p-account">
+    <div class="acc-wrap">
+        <h1>Mon compte</h1>
+        <p class="acc-hello">Bonjour {{ app.user.firstName }} {{ app.user.lastName }} · <span class="mono">{{ app.user.email }}</span></p>
+
+        {# --- Historique des commandes --- #}
+        <section class="acc-block">
+            <h2>Mes commandes</h2>
+            {% if orders is empty %}
+                <p class="muted">Vous n'avez pas encore passé de commande.</p>
+            {% else %}
+                <div class="orders">
+                    <div class="order-head">
+                        <span>N° de commande</span>
+                        <span>Date de validation</span>
+                        <span>Total</span>
+                    </div>
+                    {% for order in orders %}
+                        <div class="order-row">
+                            <span class="mono">{{ order.number }}</span>
+                            <span>{{ order.validatedAt|date('d/m/Y') }}</span>
+                            <span>{{ order.total|number_format(2, ',', ' ') }} €</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+
+        {# --- Accès API --- #}
+        <section class="acc-block">
+            <h2>Accès API</h2>
+            <p class="muted">
+                {% if app.user.apiAccessEnabled %}
+                    Votre accès API est <strong>activé</strong>. Vous pouvez vous connecter à l'API.
+                {% else %}
+                    Votre accès API est <strong>désactivé</strong>.
+                {% endif %}
+            </p>
+            <form method="post" action="{{ path('app_account_api_toggle') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('toggle-api') }}">
+                <button type="submit" class="cta">
+                    {{ app.user.apiAccessEnabled ? 'Désactiver mon accès API' : 'Activer mon accès API' }}
+                </button>
+            </form>
+        </section>
+
+        {# --- Suppression du compte --- #}
+        <section class="acc-block danger">
+            <h2>Supprimer mon compte</h2>
+            <p class="muted">Cette action est irréversible et supprime également toutes vos commandes.</p>
+            <form method="post" action="{{ path('app_account_delete') }}" onsubmit="return confirm('Supprimer définitivement votre compte ? Cette action est irréversible.');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete-account') }}">
+                <button type="submit" class="btn-danger">Supprimer mon compte</button>
+            </form>
+        </section>
+    </div>
+</main>
+{% endblock %}

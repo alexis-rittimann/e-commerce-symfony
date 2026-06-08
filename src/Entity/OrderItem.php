@@ -80,4 +80,12 @@ class OrderItem
 
         return $this;
     }
+
+    /**
+     * Total de la ligne = prix unitaire (figé) × quantité.
+     */
+    public function getLineTotal(): float
+    {
+        return (float) $this->unitPrice * $this->quantity;
+    }
 }

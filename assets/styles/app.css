@@ -527,3 +527,132 @@ footer { background: var(--paper-2); color: var(--muted); }
 .p-auth button[type=submit] { width: 100%; justify-content: center; margin-top: 10px; }
 .p-auth .switch { text-align: center; margin-top: 24px; font-size: 14px; color: var(--muted); }
 .p-auth .switch a { color: var(--olive); font-weight: 600; }
+
+/* ===========================================================================
+   MESSAGES FLASH
+   =========================================================================== */
+.flash {
+    max-width: 1340px;
+    margin: 16px auto 0;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+.flash-success { background: var(--lime-tint); border: 1px solid var(--lime-deep); color: var(--olive-deep); }
+.flash-error { background: #FBE9E7; border: 1px solid #F3C0B8; color: #B3261E; }
+
+/* ===========================================================================
+   BOUTONS SECONDAIRES
+   =========================================================================== */
+.btn-ghost {
+    background: transparent;
+    border: 1.5px solid var(--line);
+    color: var(--ink);
+    font-family: var(--disp);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 24px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
+}
+.btn-ghost:hover { border-color: var(--olive); color: var(--olive); }
+.btn-danger {
+    background: #B3261E;
+    border: none;
+    color: #fff;
+    font-family: var(--disp);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 24px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background .2s;
+}
+.btn-danger:hover { background: #8F1D17; }
+
+/* Cache les flèches natives du champ number du stepper quantité */
+.qty input[type=number] { -moz-appearance: textfield; }
+.qty input[type=number]::-webkit-outer-spin-button,
+.qty input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* ===========================================================================
+   PAGE PANIER  (.p-cart)
+   =========================================================================== */
+.p-cart { max-width: 1100px; margin: 0 auto; padding: 50px 36px 90px; }
+.p-cart h1 { font-family: var(--disp); font-weight: 700; font-size: 38px; letter-spacing: -.025em; text-transform: uppercase; margin-bottom: 28px; }
+.p-cart .empty { font-size: 16px; color: var(--muted); }
+.p-cart .empty a { color: var(--olive); font-weight: 600; }
+
+.cart-table { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--paper); }
+.cart-head,
+.cart-line {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1.2fr 1.2fr;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 22px;
+}
+.cart-head {
+    background: var(--paper-2);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.cart-head span:not(:first-child),
+.cart-line .cl-qty,
+.cart-line .cl-unit,
+.cart-line .cl-total { text-align: right; }
+.cart-line { border-top: 1px solid var(--line); }
+.cart-line .lbl { display: none; }
+.cl-product { display: flex; align-items: center; gap: 14px; }
+.cl-img { width: 64px; height: 64px; border-radius: 8px; overflow: hidden; position: relative; flex-shrink: 0; }
+.cl-img img, .cl-img .ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.cl-img .ph::after { font-size: 8px; padding: 4px; }
+.cl-name a { font-family: var(--disp); font-weight: 600; font-size: 16px; }
+.cl-name a:hover { color: var(--olive); }
+.cl-name span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.cl-total { font-family: var(--disp); font-weight: 700; }
+
+.cart-foot { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+.cart-total { font-family: var(--disp); font-size: 16px; text-transform: uppercase; letter-spacing: .02em; }
+.cart-total b { font-size: 26px; margin-left: 10px; }
+.cart-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ===========================================================================
+   PAGE MON COMPTE  (.p-account)
+   =========================================================================== */
+.p-account { max-width: 900px; margin: 0 auto; padding: 50px 36px 90px; }
+.p-account h1 { font-family: var(--disp); font-weight: 700; font-size: 38px; letter-spacing: -.025em; text-transform: uppercase; }
+.p-account .acc-hello { font-size: 14.5px; color: var(--muted); margin: 8px 0 36px; }
+.acc-block { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 28px 28px; margin-bottom: 20px; }
+.acc-block h2 { font-family: var(--disp); font-weight: 700; font-size: 20px; letter-spacing: -.01em; text-transform: uppercase; margin-bottom: 16px; }
+.acc-block .muted { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+.acc-block.danger { border-color: #E7B5AE; }
+.acc-block.danger h2 { color: #B3261E; }
+
+.orders { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.order-head,
+.order-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; padding: 14px 18px; align-items: center; }
+.order-head {
+    background: var(--paper-2);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.order-row { border-top: 1px solid var(--line); font-size: 14px; }
+.order-row span:last-child { font-family: var(--disp); font-weight: 700; }
+
+@media (max-width: 720px) {
+    .cart-head { display: none; }
+    .cart-line { grid-template-columns: 1fr; gap: 6px; }
+    .cart-line .cl-qty, .cart-line .cl-unit, .cart-line .cl-total { text-align: left; display: flex; justify-content: space-between; }
+    .cart-line .lbl { display: inline; font-family: var(--mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+    .order-head { display: none; }
+    .order-row { grid-template-columns: 1fr; gap: 4px; }
+}

@@ -138,4 +138,30 @@ class Order
 
         return $this;
     }
+
+    /**
+     * Total de la commande = somme des totaux de chaque ligne.
+     */
+    public function getTotal(): float
+    {
+        $total = 0.0;
+        foreach ($this->items as $item) {
+            $total += $item->getLineTotal();
+        }
+
+        return $total;
+    }
+
+    /**
+     * Nombre total d'articles (somme des quantités).
+     */
+    public function getTotalQuantity(): int
+    {
+        $quantity = 0;
+        foreach ($this->items as $item) {
+            $quantity += $item->getQuantity();
+        }
+
+        return $quantity;
+    }
 }
