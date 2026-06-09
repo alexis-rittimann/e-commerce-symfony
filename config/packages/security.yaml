@@ -16,6 +16,22 @@ security:
             # Ensure dev tools and static assets are always allowed
             pattern: ^/(_profiler|_wdt|assets|build)/
             security: false
+        # Firewall de connexion à l'API : reçoit { username, password } en JSON,
+        # renvoie un token JWT (ou 401 / 403 via les handlers).
+        api_login:
+            pattern: ^/api/login
+            stateless: true
+            json_login:
+                check_path: api_login
+                username_path: username
+                password_path: password
+                success_handler: App\Security\ApiLoginSuccessHandler
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        # Firewall des routes API protégées : exige un token JWT valide.
+        api:
+            pattern: ^/api
+            stateless: true
+            jwt: ~
         main:
             lazy: true
             provider: app_user_provider
@@ -36,8 +52,8 @@ security:
 
     # Note: Only the *first* matching rule is applied
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: ROLE_USER }
 
 when@test:
     security:
