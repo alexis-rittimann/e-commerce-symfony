@@ -1,115 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ product.name }} — OLEA{% endblock %}
+{% block title %}{{ product.name }} — GreenGoodies{% endblock %}
 
 {% block body %}
 <main class="p-product">
-
-    {# ===================== Fil d'ariane ===================== #}
-    <div class="crumb">
-        <a href="{{ path('app_home') }}">Boutique</a> / <span class="current">{{ product.name }}</span>
-    </div>
-
-    {# ===================== Produit ===================== #}
     <section class="product">
+        {# --- Image produit (gauche) --- #}
         <div class="gallery">
-            <div class="cell big">
-                {% if product.picture %}
-                    <img src="{{ asset('images/products/' ~ product.picture) }}" alt="{{ product.name }}">
-                {% else %}
-                    <div class="ph dark" data-label="{{ product.name }} — photo principale"></div>
-                {% endif %}
-            </div>
-            <div class="cell sq"><div class="ph" data-label="Détail étiquette"></div></div>
-            <div class="cell sq"><div class="ph" data-label="Filet d'huile / macro"></div></div>
+            {% if product.picture %}
+                <img src="{{ asset('images/products/' ~ product.picture) }}" alt="{{ product.name }}">
+            {% else %}
+                <div class="ph" data-label="{{ product.name }}"></div>
+            {% endif %}
         </div>
 
+        {# --- Panneau d'achat (droite) --- #}
         <div class="panel">
-            <div class="p-top">
-                <span class="p-brand">OLEA / {{ '%02d'|format(product.id) }}</span>
-                <span class="tagb">Pressée à froid</span>
+            <div>
+                <h1 class="p-title">{{ product.name }}</h1>
+                <p class="price">{{ product.price|number_format(2, ',', ' ') }} €</p>
+                <div class="p-desc">{{ product.fullDescription }}</div>
             </div>
-            <h1 class="p-title">{{ product.name }}</h1>
-            <div class="rating"><span class="stars">★★★★★</span><span>4,9 · 218 avis</span></div>
-            <div class="price">{{ product.price|number_format(2, ',', ' ') }} € <span>{{ product.shortDescription }}</span></div>
-            <p class="p-desc">{{ product.fullDescription }}</p>
 
-            {% if app.user %}
-                <form method="post" action="{{ path('app_cart_add', {id: product.id}) }}">
-                    <input type="hidden" name="_token" value="{{ csrf_token('add-to-cart') }}">
-                    <div class="label">Quantité</div>
-                    <div class="buyrow">
-                        <div class="qty" data-controller="quantity">
-                            <button type="button" data-action="quantity#decrease">–</button>
-                            <input type="number" name="quantity" min="0" value="{{ cartQuantity > 0 ? cartQuantity : 1 }}" data-quantity-target="input">
-                            <button type="button" data-action="quantity#increase">+</button>
+            <div class="buy">
+                {% if app.user %}
+                    <form method="post" action="{{ path('app_cart_add', {id: product.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('add-to-cart') }}">
+                        <div class="qty-row">
+                            <span class="qty-label">Quantité</span>
+                            <div class="qty" data-controller="quantity">
+                                <button type="button" data-action="quantity#decrease">–</button>
+                                <input type="number" name="quantity" min="0" value="{{ cartQuantity > 0 ? cartQuantity : 1 }}" data-quantity-target="input">
+                                <button type="button" data-action="quantity#increase">+</button>
+                            </div>
                         </div>
                         <button type="submit" class="add">
-                            {{ cartQuantity > 0 ? 'Mettre à jour' : 'Ajouter au panier' }} →
+                            {{ cartQuantity > 0 ? 'Mettre à jour' : 'Ajouter au panier' }}
                         </button>
-                    </div>
-                </form>
-            {% else %}
-                <a class="cta login-cta" href="{{ path('app_login') }}">Se connecter pour commander →</a>
-            {% endif %}
-            <div class="reassure">
-                <span class="chip">✦ Pressée à froid</span>
-                <span class="chip">✦ Sans solvant</span>
-                <span class="chip">✦ Expédié 48h</span>
-            </div>
-
-            <div class="acc">
-                <details open>
-                    <summary>Le produit <span class="pm">+</span></summary>
-                    <div class="body">{{ product.fullDescription }}</div>
-                </details>
-                <details>
-                    <summary>Conservation <span class="pm">+</span></summary>
-                    <div class="body">À l'abri de la lumière et de la chaleur. À consommer dans les 6 mois après ouverture.</div>
-                </details>
-                <details>
-                    <summary>Livraison &amp; retours <span class="pm">+</span></summary>
-                    <div class="body">Expédition sous 48h en France. Retours acceptés sous 14 jours pour tout produit non ouvert.</div>
-                </details>
+                    </form>
+                {% else %}
+                    <a class="cta login-cta" href="{{ path('app_login') }}">Se connecter pour commander</a>
+                {% endif %}
             </div>
         </div>
     </section>
-
-    {# ===================== Bandeau specs (niveau marque) ===================== #}
-    <section class="specs">
-        <div class="specsin">
-            <div class="spec"><div class="k">Pression</div><b>À froid</b><p>Première pression mécanique, le jour de la récolte.</p></div>
-            <div class="spec"><div class="k">Extraction</div><b>&lt; 27°C</b><p>Zéro chauffe, arômes intacts.</p></div>
-            <div class="spec"><div class="k">Composition</div><b>0 additif</b><p>Sans solvant ni conservateur.</p></div>
-            <div class="spec"><div class="k">Origine</div><b>France</b><p>Producteurs sélectionnés, récolte 2025.</p></div>
-        </div>
-    </section>
-
-    {# ===================== À associer ===================== #}
-    {% if related is not empty %}
-    <section class="sec">
-        <div class="sechead">
-            <h2>À associer</h2>
-            <a href="{{ path('app_home') }}">Toute la boutique →</a>
-        </div>
-        <div class="grid">
-            {% for item in related %}
-                <a class="card" href="{{ path('app_product_show', {id: item.id}) }}">
-                    <div class="imgw">
-                        {% if item.picture %}<img src="{{ asset('images/products/' ~ item.picture) }}" alt="{{ item.name }}" loading="lazy">{% else %}<div class="ph" data-label="{{ item.name }}"></div>{% endif %}
-                    </div>
-                    <div class="info">
-                        <div>
-                            <h3>{{ item.name }}</h3>
-                            <div class="fmt2">{{ item.shortDescription }}</div>
-                        </div>
-                        <span class="price2">{{ item.price|number_format(2, ',', ' ') }} €</span>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    </section>
-    {% endif %}
-
 </main>
 {% endblock %}

@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion — OLEA{% endblock %}
+{% block title %}Connexion — GreenGoodies{% endblock %}
 
 {% block body %}
 <main class="p-auth">
-    <div class="auth-card">
-        <div class="kick">Content de vous revoir</div>
+    <div class="auth-image"><img src="{{ asset('images/branch-mimosa.webp') }}" alt="Branche fleurie"></div>
+
+    <div class="auth-form">
         <h1>Connexion</h1>
-        <p class="sub">Connectez-vous à votre compte OLEA.</p>
 
         <form method="post">
             {% if error %}
@@ -15,7 +15,7 @@
             {% endif %}
 
             <div>
-                <label for="username">Email</label>
+                <label for="username">Adresse email</label>
                 <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
             </div>
 
@@ -26,10 +26,10 @@
 
             <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
-            <button type="submit" class="cta">Se connecter →</button>
+            <button type="submit" class="auth-submit">Se connecter</button>
         </form>
 
-        <p class="switch">Pas encore de compte ? <a href="{{ path('app_register') }}">S'inscrire</a></p>
+        <p class="switch"><a href="{{ path('app_register') }}">Pas encore de compte ? S'inscrire</a></p>
     </div>
 </main>
 {% endblock %}

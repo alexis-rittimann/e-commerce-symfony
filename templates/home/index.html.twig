@@ -1,84 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}OLEA — Huiles pressées à froid, en France{% endblock %}
+{% block title %}GreenGoodies — Produits durables et éthiques{% endblock %}
 
 {% block body %}
 <main class="p-home">
 
     {# ===================== Hero ===================== #}
     <section class="hero">
-        <div class="hero-l">
-            <div class="kick mono">Atelier d'huiles · France</div>
-            <h1 class="hbig">Pressées<br>à <em>froid.</em><br>Point.</h1>
-            <div class="bottom">
-                <p>Olive, colza, noix — extraites à moins de 27°C, sans solvant. Le goût brut de la graine, rien d'ajouté.</p>
-                <a class="cta" href="#shop">Voir la boutique →</a>
-            </div>
+        <div class="hero-text">
+            <h1>Bienvenue</h1>
+            <p>Découvrez notre univers de produits durables et éthiques pour une consommation responsable.</p>
+            <p>Retrouvez des articles d'hygiène &amp; beauté, des accessoires &amp; boissons et du prêt-à-porter.</p>
         </div>
-        <div class="hero-r">
-            <img src="{{ asset('images/products/huile-olive.webp') }}" alt="Huile d'olive OLEA sur lit d'olives" class="hero-img">
-            <div class="ticket"><b>28€/L</b><span>Vierge extra</span></div>
+        <div class="hero-image">
+            <img src="{{ asset('images/hero-sustainable.webp') }}" alt="Mode et consommation durables">
         </div>
     </section>
 
-    {# ===================== Ticker ===================== #}
-    <div class="ticker"><span>Vierge extra ✦ Sans solvant ✦ Première pression ✦ Origine France ✦ Récolte 2025 ✦ Vierge extra ✦ Sans solvant ✦ Première pression ✦</span></div>
-
-    {# ===================== Boutique (produits depuis la base) ===================== #}
-    <section class="sec" id="shop">
-        <div class="sechead">
-            <h2>La boutique</h2>
-            <span class="idx mono">[ {{ products|length }} références ]</span>
-        </div>
-        <div class="grid">
+    {# ===================== Nos produits ===================== #}
+    <section class="products">
+        <div class="section-label">Nos produits</div>
+        <div class="product-grid">
             {% for product in products %}
-                <a class="card" href="{{ path('app_product_show', {id: product.id}) }}">
-                    <div class="imgw">
-                        <span class="num">{{ '%02d'|format(loop.index) }}</span>
-                        {% if loop.first %}<span class="badge">Best-seller</span>{% endif %}
+                <article class="product-card">
+                    <a class="product-image" href="{{ path('app_product_show', {id: product.id}) }}">
                         {% if product.picture %}
                             <img src="{{ asset('images/products/' ~ product.picture) }}" alt="{{ product.name }}" loading="lazy">
                         {% else %}
                             <div class="ph" data-label="{{ product.name }}"></div>
                         {% endif %}
-                    </div>
-                    <div class="info">
-                        <h3>{{ product.name }}</h3>
-                        <span class="desc">{{ product.shortDescription }}</span>
-                        <div class="row">
-                            <span class="price">{{ product.price|number_format(2, ',', ' ') }} €</span>
-                            <span class="plus">+</span>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                    <h3>{{ product.name }}</h3>
+                    <p class="desc">{{ product.shortDescription }}</p>
+                    <p class="price">{{ product.price|number_format(2, ',', ' ') }}€</p>
+                    <a class="link" href="{{ path('app_product_show', {id: product.id}) }}">Voir le produit</a>
+                </article>
             {% else %}
                 <p>Aucun produit pour le moment.</p>
             {% endfor %}
         </div>
     </section>
 
-    {# ===================== Bandeau stats ===================== #}
-    <section class="band">
-        <div class="bandin">
-            <h2>Une seule <em>pression.</em> À froid. Sans compromis.</h2>
-            <div class="stat"><b>&lt;27°</b><span>Température max d'extraction. Zéro chauffe, arômes intacts.</span></div>
-            <div class="stat"><b>0</b><span>Solvant, additif, conservateur. Que de l'huile, vraiment.</span></div>
+    {# ===================== Notre conviction ===================== #}
+    <section class="conviction">
+        <div class="conviction-text">
+            <div class="section-label">Notre conviction</div>
+            <p>Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre mission est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique.</p>
+        </div>
+        <div class="conviction-image">
+            <img src="{{ asset('images/branch-mimosa.webp') }}" alt="Branche fleurie">
         </div>
     </section>
 
-    {# ===================== Le procédé ===================== #}
-    <section class="sec">
-        <div class="proc">
-            <div class="media"><div class="ph dark" data-label="Photo atelier — pressoir, filets d'huile"></div></div>
-            <div class="txt">
-                <div class="kick mono">Le procédé</div>
-                <h2>Du champ à la bouteille en 24h</h2>
-                <p>On récolte à maturité, on presse mécaniquement le jour même, on met en verre teinté. C'est tout — et c'est ce qui change tout.</p>
-                <div class="steps">
-                    <div class="s"><b>01</b><p>Récolte à la main, pressée sous 24h.</p></div>
-                    <div class="s"><b>02</b><p>Pression mécanique à froid, sous 27°C.</p></div>
-                    <div class="s"><b>03</b><p>Mise en bouteille teintée, à l'abri de la lumière.</p></div>
-                </div>
+    {# ===================== Nos valeurs ===================== #}
+    <section class="valeurs">
+        <div class="valeurs-image">
+            <img src="{{ asset('images/leaves.webp') }}" alt="Feuillage">
+        </div>
+        <div class="valeurs-text">
+            <div class="valeurs-inner">
+                <div class="section-label">Nos valeurs</div>
+                <p>Durabilité : Nous sélectionnons soigneusement des produits qui respectent l'environnement et favorisent la durabilité.</p>
+                <p>Éthique : Nous nous engageons à travailler avec des partenaires et des fournisseurs qui partagent nos valeurs éthiques.</p>
+                <p>Écologie : Nous encourageons des pratiques respectueuses de l'écosystème et privilégions les matériaux écologiques.</p>
             </div>
         </div>
     </section>

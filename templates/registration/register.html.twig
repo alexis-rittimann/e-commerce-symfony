@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription — OLEA{% endblock %}
+{% block title %}Inscription — GreenGoodies{% endblock %}
 
 {% block body %}
 <main class="p-auth">
-    <div class="auth-card">
-        <div class="kick">Bienvenue</div>
-        <h1>Créer un compte</h1>
-        <p class="sub">Rejoignez OLEA pour commander nos huiles pressées à froid.</p>
+    <div class="auth-image"><img src="{{ asset('images/branch-mimosa.webp') }}" alt="Branche fleurie"></div>
+
+    <div class="auth-form">
+        <h1>Inscription</h1>
+        <p class="required-note">Tous les champs sont obligatoires.</p>
 
         {{ form_start(registrationForm) }}
             {{ form_row(registrationForm.firstName) }}
@@ -22,10 +23,10 @@
             </div>
             {{ form_errors(registrationForm.agreeTerms) }}
 
-            <button type="submit" class="cta">Créer mon compte →</button>
+            <button type="submit" class="auth-submit">Créer mon compte</button>
         {{ form_end(registrationForm) }}
 
-        <p class="switch">Déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+        <p class="switch"><a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a></p>
     </div>
 </main>
 {% endblock %}

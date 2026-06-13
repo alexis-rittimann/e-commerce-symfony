@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier — OLEA{% endblock %}
+{% block title %}Mon panier — GreenGoodies{% endblock %}
 
 {% block body %}
 <main class="p-cart">
@@ -8,50 +8,41 @@
         <h1>Mon panier</h1>
 
         {% if cart.items is empty %}
-            <p class="empty">Votre panier est vide. <a href="{{ path('app_home') }}">Voir la boutique →</a></p>
+            <p class="empty">Votre panier est vide. <a href="{{ path('app_home') }}">Voir la boutique</a></p>
         {% else %}
-            <div class="cart-table">
-                <div class="cart-head">
-                    <span>Produit</span>
-                    <span>Quantité</span>
-                    <span>Prix unitaire</span>
-                    <span>Total</span>
-                </div>
+            <form class="clear-form" method="post" action="{{ path('app_cart_clear') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('clear-cart') }}">
+                <button type="submit" class="clear-link">✕ Vider le panier</button>
+            </form>
+
+            <div class="cart-card">
                 {% for item in cart.items %}
                     <div class="cart-line">
-                        <div class="cl-product">
-                            <div class="cl-img">
-                                {% if item.product.picture %}
-                                    <img src="{{ asset('images/products/' ~ item.product.picture) }}" alt="{{ item.product.name }}">
-                                {% else %}
-                                    <div class="ph" data-label="{{ item.product.name }}"></div>
-                                {% endif %}
-                            </div>
-                            <div class="cl-name">
-                                <a href="{{ path('app_product_show', {id: item.product.id}) }}">{{ item.product.name }}</a>
-                                <span>{{ item.product.shortDescription }}</span>
-                            </div>
+                        <div class="cl-img">
+                            {% if item.product.picture %}
+                                <img src="{{ asset('images/products/' ~ item.product.picture) }}" alt="{{ item.product.name }}">
+                            {% else %}
+                                <div class="ph" data-label="{{ item.product.name }}"></div>
+                            {% endif %}
                         </div>
-                        <div class="cl-qty"><span class="lbl">Quantité</span>{{ item.quantity }}</div>
-                        <div class="cl-unit"><span class="lbl">Prix unitaire</span>{{ item.unitPrice|number_format(2, ',', ' ') }} €</div>
-                        <div class="cl-total"><span class="lbl">Total</span>{{ item.lineTotal|number_format(2, ',', ' ') }} €</div>
+                        <div class="cl-info">
+                            <h3>{{ item.product.name }}</h3>
+                            <p class="cl-meta">Quantité : {{ item.quantity }} · Prix unitaire : {{ item.unitPrice|number_format(2, ',', ' ') }} €</p>
+                            <p class="cl-total">{{ item.lineTotal|number_format(2, ',', ' ') }} €</p>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
 
-            <div class="cart-foot">
-                <div class="cart-total">Total commande <b>{{ cart.total|number_format(2, ',', ' ') }} €</b></div>
-                <div class="cart-actions">
-                    <form method="post" action="{{ path('app_cart_clear') }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token('clear-cart') }}">
-                        <button type="submit" class="btn-ghost">Vider le panier</button>
-                    </form>
-                    <form method="post" action="{{ path('app_cart_validate') }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token('validate-order') }}">
-                        <button type="submit" class="cta">Valider la commande →</button>
-                    </form>
-                </div>
+            <div class="cart-totals">
+                <div class="ct-line">Total panier : <b>{{ cart.total|number_format(2, ',', ' ') }} €</b></div>
+                <div class="ct-ship">Frais de livraison : Offert</div>
             </div>
+
+            <form class="validate-form" method="post" action="{{ path('app_cart_validate') }}">
+                <input type="hidden" name="_token" value="{{ csrf_token('validate-order') }}">
+                <button type="submit" class="validate-btn">Valider la commande</button>
+            </form>
         {% endif %}
     </div>
 </main>
